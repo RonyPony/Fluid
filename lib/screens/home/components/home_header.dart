@@ -18,22 +18,23 @@ class HomeHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     var shoppingCartProvider =
         getProvider<ShoppingCartProvider>(listen: true, context: context);
-    List<CartItem> shoppingCartItems =
-        shoppingCartProvider.shoppingCartItems;
+    List<CartItem> shoppingCartItems = shoppingCartProvider.shoppingCartItems;
     return Padding(
       padding:
           EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
       child: Column(
         children: [
-          Row(     
-            mainAxisAlignment: MainAxisAlignment.center,       
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image(
-                  height: 160,
-                  image: NetworkImage(
-                      //'https://brandslogos.com/wp-content/uploads/images/large/levis-logo-3.png'
-                      'https://vaporescrew.cl/wp-content/uploads/2019/05/LogoWeb.png'
-                      )),
+                  height: 100,
+                  image: AssetImage('assets/images/fedex-express.png')
+                  // NetworkImage(
+                  //     //'https://brandslogos.com/wp-content/uploads/images/large/levis-logo-3.png'
+                  //     'https://vaporescrew.cl/wp-content/uploads/2019/05/LogoWeb.png'
+                  //     )
+                  ),
             ],
           ),
           Row(
@@ -42,7 +43,7 @@ class HomeHeader extends StatelessWidget {
               SearchField(),
               IconBtnWithCounter(
                 svgSrc: "assets/icons/Cart Icon.svg",
-                numOfitem: shoppingCartItems.length,                
+                numOfitem: shoppingCartItems.length,
                 press: () => Navigator.pushNamed(context, CartScreen.routeName),
               ),
               IconBtnWithCounter(
@@ -59,4 +60,3 @@ class HomeHeader extends StatelessWidget {
     );
   }
 }
-

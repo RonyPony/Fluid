@@ -17,17 +17,13 @@ class HomeScreen extends StatelessWidget {
     }
     Position currentLocation = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.best);
-
-
   }
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
-      
       body: Body(),
-      backgroundColor: kPrimaryColor.withOpacity(0.2),
+      //backgroundColor: kPrimaryColor.withOpacity(0.2),
       bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.home),
     );
   }
