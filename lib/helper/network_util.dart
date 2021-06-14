@@ -22,7 +22,7 @@ class NetworkUtil {
   static Dio getClient() {
     final Dio dio = _createClient();
     dio.options.followRedirects = true;
-    
+
     dio.options.validateStatus = (status) {
       return status < 500;
     };
@@ -45,7 +45,7 @@ class NetworkUtil {
   static Dio _createClient() {
     String apiName = EnvConfig.configs['userAuthenticationApiUrl'];
     Dio dio = Dio();
-    dio.options.baseUrl = '${apiName}api/';
+    dio.options.baseUrl = '${apiName}';
     dio.options.connectTimeout = 20 * 3000;
     dio.options.receiveTimeout = 30 * 3000;
     dio.options.followRedirects = false;
@@ -93,7 +93,6 @@ class _RequestInterceptor extends InterceptorsWrapper {
     if (difference > 2 || difference < -1)
       throw new PlatformException(message: 'Token expired', code: '401');
 
-      return token;
+    return token;
   }
-
 }

@@ -56,9 +56,9 @@ class AuthenticationService implements AuthenticationServiceContract {
       final sharedPreferences = await SharedPreferences.getInstance();
       final client = NetworkUtil.getClient();
       final queryParams = {'username': user.email, 'password': user.password};
-      
+
       final tokenResponse =
-          await client.get('token', queryParameters: queryParams);
+          await client.post('jwt-auth/v1/token', queryParameters: queryParams);
       if (tokenResponse.statusCode < 400) {
         final data = tokenResponse.data;
         final token = TokenResponse.fromJson(data);
@@ -319,19 +319,18 @@ class AuthenticationService implements AuthenticationServiceContract {
   }
 
   @override
-  Future<ClientUser> getTempUser()async{
+  Future<ClientUser> getTempUser() async {
     try {
       final sharedPreferences = await SharedPreferences.getInstance();
       String usr = sharedPreferences.getString(NetworkUtil.TEMP_USER_KEY);
-          
+
       ClientUser _user = ClientUser.fromJson(jsonDecode(usr));
       return _user;
     } catch (e) {
       return null;
     }
-   {
-    
-  }}
+    {}
+  }
 }
 
 class UserAge {

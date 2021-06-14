@@ -40,7 +40,8 @@ class ShoppingCartProvider with ChangeNotifier {
     if (product == null) return;
 
     if (!existsProduct(product)) {
-      shoppingCartItems.add(new CartItem(product: product,numOfItem: quantity));
+      shoppingCartItems
+          .add(new CartItem(product: product, numOfItem: quantity));
       totalAmount = getShoppingCartTotal();
       notifyListeners();
     }
@@ -50,7 +51,7 @@ class ShoppingCartProvider with ChangeNotifier {
     double total = 0.00;
 
     for (var item in shoppingCartItems) {
-      total += item.product.price * item.numOfItem;
+      total += double.parse(item.product.price) * item.numOfItem;
     }
 
     return total;
@@ -99,7 +100,7 @@ class ShoppingCartProvider with ChangeNotifier {
 
   bool hasDifferentVendorOnCart(StoreBasicInfo store) {
     int count = getProductsCount();
-    if (_store == null|| count <= 0) {
+    if (_store == null || count <= 0) {
       return false;
     }
 
@@ -138,7 +139,7 @@ class ShoppingCartProvider with ChangeNotifier {
         city: userAddress.city,
         address1: userAddress.address,
         phoneNumber: user.phone,
-        zipPostalCode: userAddress.zipCode?? '99',
+        zipPostalCode: userAddress.zipCode ?? '99',
         countryId: panamaCountry);
 
     final requestAddressCoordinates = IngAddressWithCoordinates(
@@ -149,7 +150,7 @@ class ShoppingCartProvider with ChangeNotifier {
         city: requestAddress.city,
         address1: requestAddress.address1,
         phoneNumber: requestAddress.phoneNumber,
-        zipPostalCode: requestAddress.zipPostalCode?? '99',
+        zipPostalCode: requestAddress.zipPostalCode ?? '99',
         countryId: panamaCountry,
         longitude: userAddress.longitude,
         latitude: userAddress.latitude);

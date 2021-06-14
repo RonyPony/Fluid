@@ -56,7 +56,10 @@ class Body extends StatelessWidget {
                         ),
                         DefaultButton(
                           text: "Go back",
-                          icon: Icon(Icons.arrow_back_ios_rounded,color: Colors.white,),
+                          icon: Icon(
+                            Icons.arrow_back_ios_rounded,
+                            color: Colors.white,
+                          ),
                           press: () {
                             Navigator.pop(context);
                           },
@@ -74,26 +77,24 @@ class Body extends StatelessWidget {
   }
 }
 
-_buildAcat(cate.Categories e,BuildContext context) {
-    if (e.published) {
-      return Column(
-        children: [
-          CategoryCard(
-              category: e.name,
-              image: e.image.src,
-              numOfBrands: e.id,
-              press: (){
-                Navigator.pushNamed(context, CategoryDetailScreen.routeName,arguments:CatDetailsArguments(catId: e.id) );
-              }),
-              SizedBox(height: 30,)
-        ],
-      );
-    } else {
-      return SizedBox();
-    }
-  }
-
-
+_buildAcat(cate.Categories e, BuildContext context) {
+  return Column(
+    children: [
+      CategoryCard(
+          category: e.name,
+          image:
+              'https://i.pinimg.com/736x/f5/e3/9b/f5e39b4d6b6dcd0ddb5c5d26b1e84ca5.jpg',
+          numOfBrands: e.id,
+          press: () {
+            Navigator.pushNamed(context, CategoryDetailScreen.routeName,
+                arguments: CatDetailsArguments(catId: e.id));
+          }),
+      SizedBox(
+        height: 30,
+      )
+    ],
+  );
+}
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({
@@ -166,4 +167,3 @@ class CategoryCard extends StatelessWidget {
     );
   }
 }
-

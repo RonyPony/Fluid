@@ -23,7 +23,7 @@ class _AllProductsSectionState extends State<AllProductsSection> {
   @override
   Widget build(BuildContext context) {
     final productsProvider = Provider.of<CatalogProvider>(context);
-    
+
     Future<cate.AllProducts> allProducts = productsProvider.getAllProducts();
     return Column(
       children: [
@@ -78,9 +78,9 @@ class _AllProductsSectionState extends State<AllProductsSection> {
     });
     Product producto = Product(
         description: e.shortDescription,
-        fullDescription: e.fullDescription,
+        fullDescription: e.description,
         images: imagenes,
-        price: e.price,
+        price: e.prices.price,
         title: e.name,
         sku: e.sku,
         tags: e.tags,
@@ -93,93 +93,89 @@ class _AllProductsSectionState extends State<AllProductsSection> {
       ruta =
           'https://www.riversideplazashepparton.com.au/wp-content/uploads/2015/10/image-store-placeholder-logo.png';
     }
-    if (e.published) {
-      print(e.id);
-      return Padding(
-        padding: EdgeInsets.only(left: getProportionateScreenWidth(0)),
-        child: SizedBox(
-          width: getProportionateScreenWidth(300),
-          child: GestureDetector(
-            key: Key(e.id.toString()),
-            onTap: () => Navigator.pushNamed(
-              context,
-              DetailsScreen.routeName,
-              arguments: ProductDetailsArguments(product: producto),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AspectRatio(
-                  aspectRatio: 1.02,
-                  child: Container(
-                    padding: EdgeInsets.all(getProportionateScreenWidth(20)),
-                    decoration: BoxDecoration(
-                      color: kSecondaryColor.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child:
+    print(e.id);
+    return Padding(
+      padding: EdgeInsets.only(left: getProportionateScreenWidth(0)),
+      child: SizedBox(
+        width: getProportionateScreenWidth(300),
+        child: GestureDetector(
+          key: Key(e.id.toString()),
+          onTap: () => Navigator.pushNamed(
+            context,
+            DetailsScreen.routeName,
+            arguments: ProductDetailsArguments(product: producto),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AspectRatio(
+                aspectRatio: 1.02,
+                child: Container(
+                  padding: EdgeInsets.all(getProportionateScreenWidth(20)),
+                  decoration: BoxDecoration(
+                    color: kSecondaryColor.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child:
 
-                        // Hero(
-                        //   tag: e.id.toString(),
-                        //   child: Image(
-                        // height: 200,
-                        // image: NetworkImage(
-                        //     e.images[0].src)),
-                        //   //child:isImageUrl ? Image.asset(product.images[0]):Image(image: NetworkImage(product.images[0]),),
-                        // ),
+                      // Hero(
+                      //   tag: e.id.toString(),
+                      //   child: Image(
+                      // height: 200,
+                      // image: NetworkImage(
+                      //     e.images[0].src)),
+                      //   //child:isImageUrl ? Image.asset(product.images[0]):Image(image: NetworkImage(product.images[0]),),
+                      // ),
 
-                        Image(
-                      image: NetworkImage(ruta),
-                    ),
+                      Image(
+                    image: NetworkImage(ruta),
                   ),
                 ),
-                const SizedBox(height: 10),
-                Text(
-                  e.name,
-                  style: TextStyle(color: Colors.black),
-                  maxLines: 2,
-                ),
-                Text(e.sku + ' | ' + e.images.length.toString() + ' more pics'),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '\$${e.price}',
-                      style: TextStyle(
-                        fontSize: getProportionateScreenWidth(18),
-                        fontWeight: FontWeight.w600,
+              ),
+              const SizedBox(height: 10),
+              Text(
+                e.name,
+                style: TextStyle(color: Colors.black),
+                maxLines: 2,
+              ),
+              Text(e.sku + ' | ' + e.images.length.toString() + ' more pics'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '\$${e.prices.price}',
+                    style: TextStyle(
+                      fontSize: getProportionateScreenWidth(18),
+                      fontWeight: FontWeight.w600,
+                      color: kPrimaryColor,
+                    ),
+                  ),
+                  InkWell(
+                    borderRadius: BorderRadius.circular(50),
+                    onTap: () {},
+                    child: Container(
+                      padding: EdgeInsets.all(getProportionateScreenWidth(8)),
+                      height: getProportionateScreenWidth(28),
+                      width: getProportionateScreenWidth(28),
+                      decoration: BoxDecoration(
                         color: kPrimaryColor,
+                        shape: BoxShape.circle,
+                      ),
+                      child: SvgPicture.asset(
+                        "assets/icons/Heart Icon_2.svg",
+                        color: Colors.white,
                       ),
                     ),
-                    InkWell(
-                      borderRadius: BorderRadius.circular(50),
-                      onTap: () {},
-                      child: Container(
-                        padding: EdgeInsets.all(getProportionateScreenWidth(8)),
-                        height: getProportionateScreenWidth(28),
-                        width: getProportionateScreenWidth(28),
-                        decoration: BoxDecoration(
-                          color: kPrimaryColor,
-                          shape: BoxShape.circle,
-                        ),
-                        child: SvgPicture.asset(
-                          "assets/icons/Heart Icon_2.svg",
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 50,
-                )
-              ],
-            ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 50,
+              )
+            ],
           ),
         ),
-      );
-    } else {
-      return SizedBox();
-    }
+      ),
+    );
   }
 }

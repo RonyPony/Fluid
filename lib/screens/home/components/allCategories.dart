@@ -39,7 +39,7 @@ class AllCategoriesSection extends StatelessWidget {
                 child: Row(
                   children: [
                     ...snapshot.data.categories
-                        .map((e) => _buildAcat(e,context))
+                        .map((e) => _buildAcat(e, context))
                         .toList(),
                   ],
                 ),
@@ -54,18 +54,17 @@ class AllCategoriesSection extends StatelessWidget {
     );
   }
 
-  _buildAcat(cate.Categories e,BuildContext context) {
-    if (e.published && e.parentCategoryId == 0) {
-      return CategoryCard(
-          category: e.name,
-          image: e.image.src,
-          numOfBrands: e.id,
-          press: (){
-            Navigator.pushNamed(context, CategoryDetailScreen.routeName,arguments:CatDetailsArguments(catId: e.id) );
-          });
-    } else {
-      return SizedBox();
-    }
+  _buildAcat(cate.Categories e, BuildContext context) {
+    return CategoryCard(
+        category: e.name,
+        image: e.image != null
+            ? e.image.src
+            : 'https://i.pinimg.com/736x/f5/e3/9b/f5e39b4d6b6dcd0ddb5c5d26b1e84ca5.jpg',
+        numOfBrands: e.id,
+        press: () {
+          Navigator.pushNamed(context, CategoryDetailScreen.routeName,
+              arguments: CatDetailsArguments(catId: e.id));
+        });
   }
 }
 

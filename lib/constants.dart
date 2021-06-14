@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/size_config.dart';
 
 // const kPrimaryColor = Color(0xFFFF7643);
-const String appName = "Vapores Crew";
-const kPrimaryColor = Color.fromRGBO(143, 0, 10, 1.0);
+const String appName = "FluidXtores";
+const kPrimaryColor = Color.fromRGBO(233, 0, 250, 1.0);
 const kPrimaryLightColor = Color(0xFFFFECDF);
 const kPrimaryGradientColor = LinearGradient(
   begin: Alignment.topLeft,
@@ -21,6 +21,19 @@ final headingStyle = TextStyle(
   color: Colors.black,
   height: 1.5,
 );
+
+//General Configuration
+
+const bool whatsappSupport = true;
+const String whatsappSupportLink = 'http://whatsapp.com';
+const bool instagramSupport = true;
+const String instagramSupportLink = 'http://instagram.com';
+const bool facebookSupport = true;
+const String facebookSupportLink = 'http://facebook.com';
+const bool telephoneSupport = true;
+const String telephoneSupportLink = 'http://google.com';
+const bool twitterSupport = true;
+const String twitterSupportLink = 'http://twitter.com';
 
 const defaultDuration = Duration(milliseconds: 250);
 

@@ -13,7 +13,7 @@ class CatalogService implements CatalogServiceContract {
     try {
       final client = NetworkUtil.getClient();
 
-      final response = await client.get('categories');
+      final response = await client.get('wc/store/products/categories');
       if (response.statusCode < 400) {
         AllCategories ex = AllCategories.fromJson(response.data);
         return ex;
@@ -30,7 +30,7 @@ class CatalogService implements CatalogServiceContract {
     try {
       final client = NetworkUtil.getClient();
 
-      final response = await client.get('Products');
+      final response = await client.get('wc/store/products');
       if (response.statusCode < 400) {
         AllProducts ex = AllProducts.fromJson(response.data);
         return ex;
@@ -63,8 +63,8 @@ class CatalogService implements CatalogServiceContract {
   }
 
   @override
-  Future<int> getProductsCount()async{
-     try {
+  Future<int> getProductsCount() async {
+    try {
       final client = NetworkUtil.getClient();
 
       final response = await client.get('Products/count');
@@ -81,7 +81,7 @@ class CatalogService implements CatalogServiceContract {
   }
 
   @override
-  Future<ProductCategories>getProductCategories(int productid)async{
+  Future<ProductCategories> getProductCategories(int productid) async {
     try {
       final client = NetworkUtil.getTokenClient();
       final response = await client.get('categories/porproducto/$productid');

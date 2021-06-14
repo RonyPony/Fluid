@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/models/tags.dart';
 
 class Product {
   final int id;
   final String title, description;
   final List<String> images;
   final List<Color> colors;
-  final double rating, price;
+  final double rating;
+  final String price;
   final bool isFavourite, isPopular;
   final String fullDescription;
   final String sku;
-  final List<String>tags;
+  final List<Tags> tags;
 
   Product({
     @required this.id,
@@ -45,7 +47,7 @@ List<Product> demoProducts = [
       Colors.white,
     ],
     title: "Wireless Controller for PS4™",
-    price: 64.99,
+    price: '64.99',
     description: description,
     rating: 4.8,
     isFavourite: true,
@@ -63,7 +65,7 @@ List<Product> demoProducts = [
       Colors.white,
     ],
     title: "Nike Sport White - Man Pant",
-    price: 50.5,
+    price: '50.5',
     description: description,
     rating: 4.1,
     isPopular: true,
@@ -80,7 +82,7 @@ List<Product> demoProducts = [
       Colors.white,
     ],
     title: "Gloves XC Omega - Polygon",
-    price: 36.55,
+    price: '36.55',
     description: description,
     rating: 4.1,
     isFavourite: true,
@@ -98,7 +100,7 @@ List<Product> demoProducts = [
       Colors.white,
     ],
     title: "Logitech Head",
-    price: 20.20,
+    price: '20.20',
     description: description,
     rating: 4.1,
     isFavourite: true,

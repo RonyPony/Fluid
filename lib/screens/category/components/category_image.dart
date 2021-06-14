@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:shop_app/models/category_item.dart' as ko;
 import '../../../constants.dart';
@@ -28,7 +27,7 @@ class _CategoryImageState extends State<CategoryImage> {
             aspectRatio: 1,
             child: Hero(
               tag: widget.category.id.toString(),
-              child: Image(image:NetworkImage(widget.category.image.src)),
+              child: Image(image: NetworkImage(widget.category.image.src)),
             ),
           ),
         ),
@@ -55,7 +54,7 @@ class _CategoryImageState extends State<CategoryImage> {
           border: Border.all(
               color: kPrimaryColor.withOpacity(selectedImage == index ? 1 : 0)),
         ),
-        child: Image(image:NetworkImage(widget.category.image.src)),
+        child: Image(image: NetworkImage(widget.category.image.src)),
       ),
     );
   }
