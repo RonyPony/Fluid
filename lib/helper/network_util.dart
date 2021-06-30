@@ -71,7 +71,7 @@ class _RequestInterceptor extends InterceptorsWrapper {
   _RequestInterceptor({this.dio, this.username, this.password});
 
   @override
-  Future onRequest(RequestOptions options) async {
+  Future InterceptorsWrapper(RequestOptions options) async {
     dio.lock();
     final token = await _getApiToken();
     options.headers['Authorization'] = 'Bearer $token';

@@ -3,7 +3,7 @@ import 'package:shop_app/size_config.dart';
 
 // const kPrimaryColor = Color(0xFFFF7643);
 const String appName = "FluidXtores";
-const kPrimaryColor = Color.fromRGBO(233, 0, 250, 1.0);
+const kPrimaryColor = Color.fromRGBO(209, 115, 0, 1.0);
 const kPrimaryLightColor = Color(0xFFFFECDF);
 const kPrimaryGradientColor = LinearGradient(
   begin: Alignment.topLeft,

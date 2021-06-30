@@ -93,6 +93,9 @@ class _AllProductsSectionState extends State<AllProductsSection> {
       ruta =
           'https://www.riversideplazashepparton.com.au/wp-content/uploads/2015/10/image-store-placeholder-logo.png';
     }
+
+    ruta =
+        'https://www.riversideplazashepparton.com.au/wp-content/uploads/2015/10/image-store-placeholder-logo.png';
     print(e.id);
     return Padding(
       padding: EdgeInsets.only(left: getProportionateScreenWidth(0)),
