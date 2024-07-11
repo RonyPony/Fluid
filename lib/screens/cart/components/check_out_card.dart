@@ -1,3 +1,4 @@
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_app/components/default_button.dart';
@@ -15,12 +16,10 @@ class CheckoutCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     var shoppingCartProvider =
         getProvider<ShoppingCartProvider>(listen: true, context: context);
 
-    List<CartItem> shoppingCartItems =
-        shoppingCartProvider.shoppingCartItems;
+    List<CartItem> shoppingCartItems = shoppingCartProvider.shoppingCartItems;
     double cartTotal = shoppingCartProvider.totalAmount;
     return Container(
       padding: EdgeInsets.symmetric(
@@ -57,7 +56,10 @@ class CheckoutCard extends StatelessWidget {
                     color: kSecondaryColor.withOpacity(0.3),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: SvgPicture.asset("assets/icons/receipt.svg",color: kPrimaryColor,),
+                  child: SvgPicture.asset(
+                    "assets/icons/receipt.svg",
+                    color: kPrimaryColor,
+                  ),
                 ),
                 Spacer(),
                 Text("Add voucher code"),
@@ -87,9 +89,27 @@ class CheckoutCard extends StatelessWidget {
                 SizedBox(
                   width: getProportionateScreenWidth(190),
                   child: DefaultButton(
-                    icon: Icon(Icons.playlist_add_check_sharp,color: Colors.white,),
+                    icon: Icon(
+                      Icons.playlist_add_check_sharp,
+                      color: Colors.white,
+                    ),
                     text: "Check Out",
-                    press: () {},
+                    press: () {
+                      if (shoppingCartItems.length <= 0) {
+                        CoolAlert.show(
+                          context: context,
+                          backgroundColor: kPrimaryColor,
+                          barrierDismissible: true,
+                          confirmBtnText: 'Ok',
+                          confirmBtnColor: kPrimaryColor,
+                          animType: CoolAlertAnimType.slideInUp,
+                          title: 'Hey!',
+                          type: CoolAlertType.warning,
+                          text:
+                              "First you have to add some products to the cart to complete an order.",
+                        );
+                      } else {}
+                    },
                   ),
                 ),
               ],

@@ -58,14 +58,18 @@ class Body extends StatelessWidget {
                         child: Column(
                           children: [
                             DefaultButton(
-                              icon: Icon(Icons.shopping_cart_outlined,color: Colors.white,),
+                              icon: Icon(
+                                Icons.shopping_cart_outlined,
+                                color: Colors.white,
+                              ),
                               text: "Add To Cart",
                               press: () {
                                 var shoppingCartProvider =
                                     getProvider<ShoppingCartProvider>(
                                         listen: false, context: context);
 
-                                shoppingCartProvider.addProductToCart(product, 1);
+                                shoppingCartProvider.addProductToCart(
+                                    product, 1);
                                 CoolAlert.show(
                                   title:
                                       '${product.title} has been added to your cart.',
@@ -74,8 +78,9 @@ class Body extends StatelessWidget {
                                   confirmBtnText: 'Go to cart',
                                   confirmBtnColor: kPrimaryColor,
                                   animType: CoolAlertAnimType.slideInUp,
-                                  onConfirmBtnTap: (){
-                                    Navigator.pushNamed(context, CartScreen.routeName);
+                                  onConfirmBtnTap: () {
+                                    Navigator.pushNamed(
+                                        context, CartScreen.routeName);
                                   },
                                   cancelBtnText: 'Ok',
                                   showCancelBtn: true,
@@ -84,29 +89,37 @@ class Body extends StatelessWidget {
                                 );
                               },
                             ),
-                            SizedBox(height:getProportionateScreenHeight(10),),
+                            SizedBox(
+                              height: getProportionateScreenHeight(10),
+                            ),
                             DefaultButton(
-                              icon: Icon(Icons.payments_outlined,color: Colors.white,),
+                              icon: Icon(
+                                Icons.payments_outlined,
+                                color: Colors.white,
+                              ),
                               text: 'Buy it now',
-                              press: (){
-                                var authProvider = getProvider<AuthenticationProvider>(context:context,listen: false);
+                              press: () {
+                                var authProvider =
+                                    getProvider<AuthenticationProvider>(
+                                        context: context, listen: false);
                                 if (authProvider.isUserLoggedIn) {
                                   CoolAlert.show(
-                                  title:
-                                      'Cool, now ${product.title} is yours, you will get it soon',                                      
-                                  context: context,
-                                  type: CoolAlertType.success,
-                                  confirmBtnText: 'Ok',
-                                  confirmBtnColor: kPrimaryColor,
-                                  animType: CoolAlertAnimType.slideInUp,
-                                  onConfirmBtnTap: (){
-                                    Navigator.pop(context);
-                                  },                                  
-                                  borderRadius: 50,
-                                  backgroundColor: kPrimaryColor,
-                                );
-                                }else{
-                                  Navigator.pushNamed(context, SignInScreen.routeName);
+                                    title:
+                                        'Cool, now ${product.title} is yours, you will get it soon',
+                                    context: context,
+                                    type: CoolAlertType.success,
+                                    confirmBtnText: 'Ok',
+                                    confirmBtnColor: kPrimaryColor,
+                                    animType: CoolAlertAnimType.slideInUp,
+                                    onConfirmBtnTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                    borderRadius: 50,
+                                    backgroundColor: kPrimaryColor,
+                                  );
+                                } else {
+                                  Navigator.pushNamed(
+                                      context, SignInScreen.routeName);
                                 }
                               },
                             )

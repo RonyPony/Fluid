@@ -9,6 +9,8 @@ import 'package:shop_app/models/client_user.dart';
 import 'package:shop_app/providers/authentication_provider.dart';
 import 'package:shop_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:shop_app/screens/login_success/login_success_screen.dart';
+import 'package:wp_json_api/models/responses/wp_user_login_response.dart';
+import 'package:wp_json_api/wp_json_api.dart';
 import '../../../components/default_button.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -20,10 +22,11 @@ class SignForm extends StatefulWidget {
 
 class _SignFormState extends State<SignForm> {
   @override
-  void initState() { 
+  void initState() {
     super.initState();
     performAutologinWhenPossible();
   }
+
   ClientUser _user = new ClientUser();
   final _formKey = GlobalKey<FormState>();
   String email;
@@ -51,9 +54,8 @@ class _SignFormState extends State<SignForm> {
 
     bool userIsAlreadyLogged = await authProvider.hasUserAlreadyLoggedIn();
     await authProvider.getCurrentUser();
-    if (userIsAlreadyLogged && authProvider.loggedUser!=null) {
-      
-      authProvider.isUserLoggedIn=true;
+    if (userIsAlreadyLogged && authProvider.loggedUser != null) {
+      authProvider.isUserLoggedIn = true;
       KeyboardUtil.hideKeyboard(context);
       Navigator.pushNamed(context, LoginSuccessScreen.routeName);
     }
@@ -96,7 +98,10 @@ class _SignFormState extends State<SignForm> {
           SizedBox(height: getProportionateScreenHeight(20)),
           DefaultButton(
             text: "Continue",
-            icon: Icon(Icons.arrow_forward_ios_sharp,color: Colors.white,),
+            icon: Icon(
+              Icons.arrow_forward_ios_sharp,
+              color: Colors.white,
+            ),
             press: () {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
@@ -110,21 +115,28 @@ class _SignFormState extends State<SignForm> {
   }
 
   Future _onFormSubmit() async {
-    try {     
-      final state = _formKey.currentState;
-      final authProvider =
-          Provider.of<AuthenticationProvider>(context, listen: false);
-      if (state.validate()) {
-        LoadingUtil.startLoading('Validating Credentials');
-        state.save();
-        _user.email = email;
-        _user.password = password;
-        await authProvider.authenticateUser(_user, remember);
-        LoadingUtil.hideLoading();
-        KeyboardUtil.hideKeyboard(context);
-        await Navigator.of(context).pushNamedAndRemoveUntil(
-            LoginSuccessScreen.routeName, (Route<dynamic> route) => false);
+    try {
+      try {
+        WPUserLoginResponse wpUserLoginResponse = await WPJsonAPI.instance.api(
+            (request) => request.wpLogin(email: email, password: password));
+      } on Exception catch (e) {
+        print(e);
       }
+
+      // final state = _formKey.currentState;
+      // final authProvider =
+      //     Provider.of<AuthenticationProvider>(context, listen: false);
+      // if (state.validate()) {
+      //   LoadingUtil.startLoading('Validating Credentials');
+      //   state.save();
+      //   _user.email = email;
+      //   _user.password = password;
+      //   await authProvider.authenticateUser(_user, remember);
+      //   LoadingUtil.hideLoading();
+      //   KeyboardUtil.hideKeyboard(context);
+      //   await Navigator.of(context).pushNamedAndRemoveUntil(
+      //       LoginSuccessScreen.routeName, (Route<dynamic> route) => false);
+      //}
     } catch (e) {
       CoolAlert.show(
         context: context,

@@ -18,12 +18,10 @@ class CartScreen extends StatelessWidget {
   }
 
   AppBar buildAppBar(BuildContext context) {
-         var shoppingCartProvider =
+    var shoppingCartProvider =
         getProvider<ShoppingCartProvider>(listen: true, context: context);
 
-    List<CartItem> shoppingCartItems =
-        shoppingCartProvider.shoppingCartItems;
-
+    List<CartItem> shoppingCartItems = shoppingCartProvider.shoppingCartItems;
 
     return AppBar(
       title: Column(
@@ -33,7 +31,7 @@ class CartScreen extends StatelessWidget {
             style: TextStyle(color: Colors.black),
           ),
           Text(
-            "${shoppingCartItems.length} items",
+            "${shoppingCartItems.length >= 1 ? shoppingCartItems.length : 'no'} items",
             style: Theme.of(context).textTheme.caption,
           ),
         ],

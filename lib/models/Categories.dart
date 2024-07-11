@@ -3,10 +3,10 @@ class AllCategories {
 
   AllCategories({this.categories});
 
-  AllCategories.fromJson(Map<String, dynamic> json) {
-    if (json['categories'] != null) {
+  AllCategories.fromJson(List<dynamic> json) {
+    if (json != null) {
       categories = new List<Categories>();
-      json['categories'].forEach((v) {
+      json.forEach((v) {
         categories.add(new Categories.fromJson(v));
       });
     }
@@ -90,7 +90,7 @@ class Categories {
     metaKeywords = json['meta_keywords'];
     metaDescription = json['meta_description'];
     metaTitle = json['meta_title'];
-    parentCategoryId = json['parent_category_id'];
+    parentCategoryId = json['parent'];
     pageSize = json['page_size'];
     pageSizeOptions = json['page_size_options'];
     priceRanges = json['price_ranges'];
@@ -104,8 +104,7 @@ class Categories {
     allowCustomersToSelectPageSize =
         json['allow_customers_to_select_page_size'];
     updatedOnUtc = json['updated_on_utc'];
-    
-    
+
     image = json['image'] != null ? new Image.fromJson(json['image']) : null;
     seName = json['se_name'];
     id = json['id'];
@@ -137,7 +136,7 @@ class Categories {
     data['allow_customers_to_select_page_size'] =
         this.allowCustomersToSelectPageSize;
     data['updated_on_utc'] = this.updatedOnUtc;
-   
+
     if (this.image != null) {
       data['image'] = this.image.toJson();
     }
